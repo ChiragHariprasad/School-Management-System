@@ -1,7 +1,19 @@
 // PerformanceSection.js
 import React from 'react';
 import Sidebar from './Sidebar';
-// import { Line } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 import {
   PerformanceContainer,
   SidebarContainer,
@@ -47,13 +59,16 @@ const PerformanceSection = () => {
             <Line
               data={lineChartData}
               options={{
+                responsive: true,
+                plugins: {
+                  legend: { position: 'top' },
+                  title: { display: true, text: 'Performance Trends' },
+                },
                 scales: {
-                  yAxes: [{
-                    ticks: {
-                      beginAtZero: true
-                    }
-                  }]
-                }
+                  y: {
+                    beginAtZero: true,
+                  },
+                },
               }}
             />
           </PerformanceGraphContainer>
